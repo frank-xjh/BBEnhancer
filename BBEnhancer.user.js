@@ -3,7 +3,7 @@
 // @namespace    https://github.com/frank-xjh/BBEnhancer
 // @homepageURL  https://github.com/frank-xjh/BBEnhancer
 // @supportURL   https://github.com/frank-xjh/BBEnhancer/issues
-// @version      0.1
+// @version      0.2
 // @description  A Enhancer for Blackboard
 // @author       Frank
 // @match        https://learn.intl.zju.edu.cn/*
@@ -13,6 +13,19 @@
 
 (function () {
     'use strict';
+
+    let listItems = document.querySelectorAll('li');
+
+    listItems.forEach(item => {
+        let img = item.querySelector('img[alt="File"]');
+        if (img) {
+            let anchor = item.querySelector('a');
+            if (anchor && anchor.hasAttribute('onclick')) {
+                anchor.removeAttribute('onclick');
+                anchor.setAttribute('target', '_blank');
+            }
+        }
+    });
 
     // Locate the course menu container
     const course = document.getElementById('courseMenu_link');
@@ -90,7 +103,7 @@
                 if (containerDiv) {
                     const links = containerDiv.querySelectorAll('a');
                     links.forEach(link => {
-                        link.target = '_blank';  // 设置 target 属性为 "_blank"
+                        link.target = '_blank';
                     });
 
                     // Replace
